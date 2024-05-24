@@ -18,4 +18,9 @@ class Product extends Model
         'stock',
         'description'
     ];
+
+    public function transactions()
+    {
+        return $this->belongsToMany(Transaction::class);
+    }
 }

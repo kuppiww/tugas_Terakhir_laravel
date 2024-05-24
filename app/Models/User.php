@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -24,6 +27,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'gender',
+        'age',
+        'birth',
+        'address',
+        'google_id',
     ];
 
     protected $dates = ['birthday'];
@@ -50,11 +58,18 @@ class User extends Authenticatable
         'birthday' => 'date',
     ];
 
-    public function summarize(){
+    public function summarize()
+    {
         return $this->hasOne(UserSummarize::class, 'user_id', 'id');
     }
 
-    public function products(){
+    public function products()
+    {
         return $this->hasMany(Product::class, 'user_id', 'id');
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
     }
 }

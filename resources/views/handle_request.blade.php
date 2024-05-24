@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-md-4 offset-4 rounded bg-info mt-3 py-3">
                 <h2 class="text-center fw-bold" style="font-size: 20px">Tambah Data Produk</h2>
-                <form class="mt-3" action="{{ route('postRequest', ['user' => $user->id]) }}" method="POST">
+                <form class="mt-3" action="{{ route('postRequest', ['user' => $user->id]) }}" enctype="multipart/form-data" method="POST">
                     @csrf
                     <div class="mb-1">
                         <label for="exampleFormControlInput1" class="form-label fw-semibold">Gambar Produk</label>
